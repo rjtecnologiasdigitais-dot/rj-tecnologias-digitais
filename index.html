@@ -1,172 +1,540 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RJ Tecnologias Digitais</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RJ Tecnologias Digitais</title>
+  <meta
+    name="description"
+    content="Landing pages e soluções digitais para empresas, cursos, escolas e profissionais que querem vender mais pelo WhatsApp e pela internet."
+  />
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-<style>
-body{
-    margin:0;
-    font-family:Arial, sans-serif;
-    background:#0b1220;
-    color:#fff;
-}
+    html {
+      scroll-behavior: smooth;
+    }
 
-.container{
-    max-width:1100px;
-    margin:auto;
-    padding:40px 20px;
-}
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #08111f;
+      color: #ffffff;
+      line-height: 1.6;
+    }
 
-.hero{
-    text-align:center;
-    padding:80px 20px;
-}
+    a {
+      text-decoration: none;
+    }
 
-.hero h1{
-    font-size:42px;
-    margin-bottom:20px;
-}
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
 
-.hero p{
-    font-size:18px;
-    color:#cbd5e1;
-    max-width:600px;
-    margin:auto;
-}
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(8, 17, 31, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
 
-.btn{
-    display:inline-block;
-    margin-top:30px;
-    padding:15px 30px;
-    background:#22c55e;
-    color:#000;
-    font-weight:bold;
-    border-radius:8px;
-    text-decoration:none;
-}
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 16px 0;
+    }
 
-.section{
-    margin-top:80px;
-}
+    .logo {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: #ffffff;
+    }
 
-.section h2{
-    text-align:center;
-    margin-bottom:30px;
-}
+    .logo span {
+      color: #22c55e;
+    }
 
-.cards{
-    display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(250px,1fr));
-    gap:20px;
-}
+    .menu {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
 
-.card{
-    background:#111827;
-    padding:20px;
-    border-radius:12px;
-}
+    .menu a {
+      color: #cbd5e1;
+      font-size: 15px;
+    }
 
-.footer{
-    text-align:center;
-    margin-top:80px;
-    padding:20px;
-    color:#94a3b8;
-}
-</style>
+    .menu a:hover {
+      color: #ffffff;
+    }
 
+    .btn {
+      display: inline-block;
+      padding: 15px 24px;
+      border-radius: 10px;
+      font-weight: 700;
+      transition: 0.2s ease;
+    }
+
+    .btn-primary {
+      background: #22c55e;
+      color: #05110a;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .hero {
+      padding: 90px 0 70px;
+      background:
+        radial-gradient(circle at top left, rgba(34, 197, 94, 0.12), transparent 35%),
+        radial-gradient(circle at top right, rgba(59, 130, 246, 0.12), transparent 30%);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 36px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 18px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(34, 197, 94, 0.12);
+      color: #86efac;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+
+    .hero h1 {
+      font-size: 52px;
+      line-height: 1.1;
+      margin: 0 0 18px;
+    }
+
+    .hero p {
+      font-size: 19px;
+      color: #cbd5e1;
+      margin: 0 0 28px;
+      max-width: 700px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 30px;
+    }
+
+    .hero-points {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .hero-point {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 16px;
+      color: #dbe7f3;
+      font-size: 14px;
+    }
+
+    .hero-card {
+      background: linear-gradient(180deg, rgba(17, 24, 39, 0.95), rgba(9, 15, 27, 0.95));
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+    }
+
+    .hero-card h3 {
+      margin-top: 0;
+      margin-bottom: 18px;
+      font-size: 24px;
+    }
+
+    .hero-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 24px;
+    }
+
+    .hero-card li {
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      color: #dbe7f3;
+    }
+
+    .hero-card li:last-child {
+      border-bottom: none;
+    }
+
+    .section {
+      padding: 80px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      max-width: 820px;
+      margin: 0 auto 18px;
+      font-size: 38px;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto 46px;
+      color: #b8c5d6;
+      font-size: 18px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .card {
+      background: #0f172a;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 18px;
+      padding: 26px;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.18);
+    }
+
+    .card h3 {
+      margin-top: 0;
+      margin-bottom: 12px;
+      font-size: 22px;
+    }
+
+    .card p {
+      margin: 0;
+      color: #cbd5e1;
+    }
+
+    .services {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .service-badge {
+      display: inline-block;
+      margin-bottom: 12px;
+      color: #86efac;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+
+    .authority {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 26px;
+      align-items: stretch;
+    }
+
+    .authority-box {
+      background: linear-gradient(180deg, rgba(15, 23, 42, 1), rgba(8, 17, 31, 1));
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 22px;
+      padding: 30px;
+    }
+
+    .authority-box h3 {
+      margin-top: 0;
+      font-size: 28px;
+      margin-bottom: 18px;
+    }
+
+    .authority-box p {
+      margin: 0 0 16px;
+      color: #cbd5e1;
+    }
+
+    .checklist {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .checklist li {
+      margin-bottom: 12px;
+      color: #dbe7f3;
+    }
+
+    .cta {
+      padding: 90px 0;
+      text-align: center;
+      background:
+        radial-gradient(circle at center, rgba(34, 197, 94, 0.12), transparent 35%);
+    }
+
+    .cta-box {
+      max-width: 860px;
+      margin: 0 auto;
+      background: linear-gradient(180deg, rgba(17, 24, 39, 0.98), rgba(8, 17, 31, 0.98));
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 24px;
+      padding: 42px 28px;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+    }
+
+    .cta-box h2 {
+      margin-top: 0;
+      font-size: 40px;
+      margin-bottom: 16px;
+    }
+
+    .cta-box p {
+      color: #cbd5e1;
+      font-size: 18px;
+      max-width: 650px;
+      margin: 0 auto 26px;
+    }
+
+    .footer {
+      padding: 28px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      color: #94a3b8;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .grid-3,
+      .authority {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-points {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 40px;
+      }
+
+      .section-title {
+        font-size: 32px;
+      }
+
+      .cta-box h2 {
+        font-size: 32px;
+      }
+
+      .menu {
+        display: none;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero {
+        padding: 70px 0 50px;
+      }
+
+      .hero h1 {
+        font-size: 34px;
+      }
+
+      .hero p,
+      .section-subtitle,
+      .cta-box p {
+        font-size: 16px;
+      }
+
+      .btn {
+        width: 100%;
+        text-align: center;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+      }
+    }
+  </style>
 </head>
-
 <body>
 
-<!-- HERO -->
-<section class="hero">
-    <div class="container">
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="logo">RJ <span>Tecnologias Digitais</span></div>
+      <nav class="menu">
+        <a href="#servicos">Serviços</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#contato">Contato</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="eyebrow">Soluções digitais com foco em resultado</div>
         <h1>Páginas que transformam visitantes em clientes</h1>
         <p>
-            Criamos páginas modernas e estratégicas para cursos, escolas e empresas que querem vender mais pelo WhatsApp e pela internet.
+          A RJ Tecnologias Digitais cria landing pages e soluções digitais para cursos,
+          escolas, clínicas e empresas que querem vender mais pelo WhatsApp e pela internet.
         </p>
 
-        <a class="btn" href="https://wa.me/5585981710860" target="_blank">
+        <div class="hero-actions">
+          <a
+            class="btn btn-primary"
+            href="https://wa.me/5585981710860?text=Olá%2C%20vim%20pelo%20site%20da%20RJ%20Tecnologias%20Digitais."
+            target="_blank"
+          >
             Falar no WhatsApp
-        </a>
-    </div>
-</section>
+          </a>
 
-<!-- PROBLEMA -->
-<section class="section">
-    <div class="container">
-        <h2>Você está perdendo alunos todos os dias</h2>
-
-        <div class="cards">
-            <div class="card">
-                ❌ Seu Instagram não converte
-            </div>
-
-            <div class="card">
-                ❌ Seu site não gera matrículas
-            </div>
-
-            <div class="card">
-                ❌ Falta um caminho claro para o aluno comprar
-            </div>
+          <a class="btn btn-secondary" href="#servicos">
+            Ver serviços
+          </a>
         </div>
-    </div>
-</section>
 
-<!-- SOLUÇÃO -->
-<section class="section">
-    <div class="container">
-        <h2>Nós resolvemos isso</h2>
-
-        <div class="cards">
-            <div class="card">
-                ✅ Página focada em vendas
-            </div>
-
-            <div class="card">
-                ✅ Botão direto para WhatsApp
-            </div>
-
-            <div class="card">
-                ✅ Estrutura pensada para conversão
-            </div>
+        <div class="hero-points">
+          <div class="hero-point">Estrutura pensada para conversão</div>
+          <div class="hero-point">Design profissional e moderno</div>
+          <div class="hero-point">Atendimento direto e personalizado</div>
         </div>
-    </div>
-</section>
+      </div>
 
-<!-- SOBRE -->
-<section class="section">
-    <div class="container">
-        <h2>RJ Tecnologias Digitais</h2>
-
-        <p style="text-align:center; max-width:700px; margin:auto; color:#cbd5e1;">
-            Especialista em tecnologia educacional, com mais de 20 anos de experiência.
-            Criamos soluções digitais que realmente geram resultados para cursos e instituições.
-        </p>
-    </div>
-</section>
-
-<!-- CTA FINAL -->
-<section class="section">
-    <div class="container" style="text-align:center;">
-        <h2>Quer mais alunos?</h2>
-
-        <p style="color:#cbd5e1;">
-            Fale comigo agora e receba uma análise gratuita do seu site ou Instagram.
-        </p>
-
-        <a class="btn" href="https://wa.me/5585SEUNUMERO" target="_blank">
-            Solicitar análise gratuita
+      <div class="hero-card">
+        <h3>O que sua empresa ganha</h3>
+        <ul>
+          <li>Mais clareza na apresentação dos seus serviços</li>
+          <li>Mais contatos pelo WhatsApp</li>
+          <li>Mais autoridade digital</li>
+          <li>Mais chances de converter visitas em vendas</li>
+        </ul>
+        <a
+          class="btn btn-primary"
+          href="https://wa.me/5585SEUNUMERO?text=Olá%2C%20quero%20uma%20análise%20do%20meu%20site%20ou%20Instagram."
+          target="_blank"
+        >
+          Solicitar análise
         </a>
+      </div>
     </div>
-</section>
+  </section>
 
-<!-- FOOTER -->
-<div class="footer">
-    © RJ Tecnologias Digitais
-</div>
+  <section class="section services" id="servicos">
+    <div class="container">
+      <h2 class="section-title">Serviços pensados para gerar resultado</h2>
+      <p class="section-subtitle">
+        Mais do que tecnologia, entregamos presença digital com estratégia,
+        clareza e foco em captação de clientes.
+      </p>
+
+      <div class="grid-3">
+        <div class="card">
+          <div class="service-badge">Landing Pages</div>
+          <h3>Páginas de alta conversão</h3>
+          <p>
+            Criamos páginas objetivas, modernas e orientadas para gerar contato,
+            orçamento, matrícula ou venda.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="service-badge">Sites Institucionais</div>
+          <h3>Presença digital profissional</h3>
+          <p>
+            Desenvolvemos páginas e sites para empresas, escolas, cursos e
+            profissionais que precisam transmitir credibilidade.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="service-badge">Estratégia Digital</div>
+          <h3>Estrutura para vender melhor</h3>
+          <p>
+            Organizamos a comunicação digital para facilitar o caminho do cliente
+            até o seu WhatsApp ou canal de venda.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="sobre">
+    <div class="container authority">
+      <div class="authority-box">
+        <h3>Sobre a RJ Tecnologias Digitais</h3>
+        <p>
+          A RJ Tecnologias Digitais atua na criação de soluções digitais com foco
+          em posicionamento, apresentação profissional e geração de oportunidades.
+        </p>
+        <p>
+          Unimos tecnologia, comunicação e visão estratégica para ajudar negócios
+          a vender melhor no ambiente digital.
+        </p>
+        <p>
+          Nosso objetivo é simples: transformar presença online em resultado real.
+        </p>
+      </div>
+
+      <div class="authority-box">
+        <h3>Por que escolher a RJ</h3>
+        <ul class="checklist">
+          <li>Atendimento direto, sem complicação</li>
+          <li>Projetos com foco em clareza e conversão</li>
+          <li>Soluções sob medida para o seu negócio</li>
+          <li>Experiência com educação, serviços e presença digital</li>
+          <li>Visual profissional com linguagem objetiva</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta" id="contato">
+    <div class="container">
+      <div class="cta-box">
+        <h2>Quer atrair mais clientes pela internet?</h2>
+        <p>
+          Fale agora com a RJ Tecnologias Digitais e receba uma análise inicial
+          do seu site, Instagram ou estrutura digital.
+        </p>
+        <a
+          class="btn btn-primary"
+          href="https://wa.me/5585SEUNUMERO?text=Olá%2C%20quero%20falar%20sobre%20um%20projeto%20com%20a%20RJ%20Tecnologias%20Digitais."
+          target="_blank"
+        >
+          Solicitar atendimento
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    © RJ Tecnologias Digitais — Soluções digitais com foco em resultado
+  </footer>
 
 </body>
 </html>
