@@ -8,25 +8,27 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --bg: #f4f5f7;
-      --bg-soft: #e9edf1;
-      --panel: #ffffff;
-      --panel-2: #f7f9fb;
+      --bg: #eef3f7;
+      --bg-2: #f7fafc;
+      --panel: rgba(255,255,255,0.78);
+      --panel-strong: #ffffff;
       --text: #16202a;
-      --text-soft: #5c6a77;
-      --line: #d9e0e7;
-      --dark: #16202a;
-      --dark-2: #22313f;
-      --brand: #2b506f;
-      --brand-soft: #d9e7f2;
+      --text-soft: #5f6d79;
+      --line: rgba(38,69,97,0.12);
+      --brand: #264561;
+      --brand-2: #385f81;
+      --brand-soft: #dce8f2;
       --accent: #2db36c;
-      --accent-dark: #21935a;
-      --radius: 22px;
-      --shadow: 0 18px 45px rgba(16, 29, 41, 0.08);
+      --accent-2: #21935a;
+      --shadow: 0 18px 45px rgba(19, 38, 54, 0.10);
+      --shadow-strong: 0 28px 70px rgba(23, 42, 58, 0.16);
+      --radius: 24px;
+      --radius-sm: 18px;
+      --max: 1180px;
     }
 
     *{
@@ -41,15 +43,13 @@
 
     body{
       font-family:'Inter', sans-serif;
-      background:linear-gradient(180deg, #f4f5f7 0%, #eef2f6 100%);
       color:var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(56,95,129,0.10), transparent 30%),
+        radial-gradient(circle at top right, rgba(45,179,108,0.07), transparent 22%),
+        linear-gradient(180deg, #eef3f7 0%, #f7fafc 100%);
       line-height:1.6;
       overflow-x:hidden;
-    }
-
-    img{
-      max-width:100%;
-      display:block;
     }
 
     a{
@@ -57,22 +57,35 @@
       color:inherit;
     }
 
+    img{
+      max-width:100%;
+      display:block;
+    }
+
     .container{
-      width:min(1180px, calc(100% - 32px));
+      width:min(var(--max), calc(100% - 32px));
       margin:0 auto;
+    }
+
+    .glass{
+      background:var(--panel);
+      border:1px solid var(--line);
+      backdrop-filter:blur(14px);
+      -webkit-backdrop-filter:blur(14px);
+      box-shadow:var(--shadow);
     }
 
     .topbar{
       position:sticky;
       top:0;
-      z-index:1000;
-      background:rgba(244,245,247,0.88);
-      backdrop-filter:blur(12px);
-      border-bottom:1px solid rgba(22,32,42,0.07);
+      z-index:999;
+      padding-top:14px;
     }
 
     .topbar-inner{
-      min-height:88px;
+      min-height:82px;
+      border-radius:22px;
+      padding:0 18px;
       display:flex;
       align-items:center;
       justify-content:space-between;
@@ -83,65 +96,96 @@
       display:flex;
       align-items:center;
       gap:14px;
+      min-width:0;
     }
 
     .brand-logo-wrap{
-      width:58px;
-      height:58px;
-      border-radius:18px;
+      width:66px;
+      height:66px;
+      border-radius:22px;
       background:#fff;
-      border:1px solid var(--line);
+      border:1px solid rgba(38,69,97,0.10);
       display:flex;
       align-items:center;
       justify-content:center;
-      box-shadow:var(--shadow);
-      overflow:hidden;
+      box-shadow:
+        0 12px 30px rgba(38,69,97,0.10),
+        inset 0 1px 0 rgba(255,255,255,0.9);
       flex-shrink:0;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .brand-logo-wrap::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:radial-gradient(circle at top left, rgba(56,95,129,0.08), transparent 55%);
+      pointer-events:none;
     }
 
     .brand-logo-wrap img{
-      width:42px;
-      height:42px;
+      width:46px;
+      height:46px;
       object-fit:contain;
+      position:relative;
+      z-index:1;
+      filter: drop-shadow(0 4px 10px rgba(0,0,0,0.08));
     }
 
     .brand-text{
-      display:flex;
-      flex-direction:column;
-      line-height:1.05;
+      min-width:0;
     }
 
     .brand-title{
       font-size:14px;
-      font-weight:800;
-      letter-spacing:3.5px;
+      font-weight:900;
       text-transform:uppercase;
-      color:var(--dark);
+      letter-spacing:4px;
+      line-height:1.2;
+      color:var(--brand);
     }
 
     .brand-subtitle{
       font-size:11px;
-      font-weight:600;
-      letter-spacing:1.2px;
       color:var(--text-soft);
+      letter-spacing:1.2px;
       margin-top:5px;
+      font-weight:600;
     }
 
     .nav{
       display:flex;
-      gap:26px;
       align-items:center;
+      gap:24px;
     }
 
     .nav a{
       font-size:15px;
       font-weight:600;
       color:var(--text-soft);
-      transition:.2s ease;
+      transition:.25s ease;
+      position:relative;
+    }
+
+    .nav a::after{
+      content:"";
+      position:absolute;
+      left:0;
+      bottom:-6px;
+      width:0;
+      height:2px;
+      background:var(--accent);
+      transition:.25s ease;
+      border-radius:999px;
     }
 
     .nav a:hover{
       color:var(--brand);
+    }
+
+    .nav a:hover::after{
+      width:100%;
     }
 
     .btn{
@@ -149,74 +193,81 @@
       align-items:center;
       justify-content:center;
       gap:10px;
+      padding:15px 24px;
+      border-radius:16px;
+      font-weight:800;
+      font-size:15px;
       border:none;
       cursor:pointer;
-      border-radius:15px;
-      padding:15px 24px;
-      font-size:15px;
-      font-weight:700;
-      transition:.22s ease;
+      transition:.25s ease;
     }
 
     .btn-primary{
-      background:var(--accent);
       color:#fff;
-      box-shadow:0 14px 28px rgba(45,179,108,0.22);
+      background:linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow:0 16px 30px rgba(45,179,108,0.24);
     }
 
     .btn-primary:hover{
-      transform:translateY(-2px);
-      background:var(--accent-dark);
+      transform:translateY(-3px) scale(1.01);
+      box-shadow:0 24px 38px rgba(45,179,108,0.28);
     }
 
     .btn-secondary{
       background:#fff;
-      color:var(--dark);
+      color:var(--brand);
       border:1px solid var(--line);
     }
 
     .btn-secondary:hover{
-      transform:translateY(-2px);
-      background:var(--panel-2);
+      transform:translateY(-3px);
+      box-shadow:var(--shadow);
     }
 
     .hero{
-      padding:76px 0 54px;
+      padding:46px 0 26px;
     }
 
     .hero-grid{
       display:grid;
-      grid-template-columns:1.08fr 0.92fr;
-      gap:34px;
+      grid-template-columns:1.1fr .9fr;
+      gap:30px;
       align-items:center;
     }
 
     .tag{
       display:inline-flex;
       align-items:center;
-      gap:8px;
+      gap:10px;
+      padding:11px 16px;
+      border-radius:999px;
       background:#fff;
       border:1px solid var(--line);
-      border-radius:999px;
-      padding:10px 14px;
+      box-shadow:var(--shadow);
       font-size:13px;
-      font-weight:700;
       color:var(--brand);
-      margin-bottom:20px;
+      font-weight:800;
+      margin-bottom:22px;
+      transition:.25s ease;
+    }
+
+    .tag:hover{
+      transform:translateY(-2px);
+      box-shadow:var(--shadow-strong);
     }
 
     .hero h1{
-      font-size:60px;
+      font-size:62px;
       line-height:1.02;
-      letter-spacing:-2.5px;
+      letter-spacing:-2.8px;
       margin-bottom:18px;
-      color:var(--dark);
+      color:#183044;
     }
 
     .hero p{
       font-size:18px;
       color:var(--text-soft);
-      max-width:720px;
+      max-width:700px;
       margin-bottom:28px;
     }
 
@@ -224,7 +275,7 @@
       display:flex;
       flex-wrap:wrap;
       gap:14px;
-      margin-bottom:28px;
+      margin-bottom:24px;
     }
 
     .hero-points{
@@ -234,74 +285,143 @@
     }
 
     .hero-point{
+      padding:11px 15px;
+      border-radius:999px;
       background:#fff;
       border:1px solid var(--line);
-      border-radius:999px;
-      padding:10px 14px;
-      font-size:14px;
-      font-weight:600;
       color:var(--text-soft);
+      font-size:14px;
+      font-weight:700;
+      transition:.25s ease;
     }
 
-    .hero-card{
-      background:linear-gradient(180deg, #284861 0%, #162733 100%);
-      color:#fff;
+    .hero-point:hover{
+      transform:translateY(-3px);
+      color:var(--brand);
+      box-shadow:var(--shadow);
+      background:linear-gradient(180deg, #fff, #f6fafc);
+    }
+
+    .hero-visual{
       border-radius:30px;
-      padding:34px;
-      box-shadow:0 24px 60px rgba(22,39,51,0.22);
+      padding:18px;
       position:relative;
       overflow:hidden;
     }
 
-    .hero-card::before{
+    .hero-visual::before{
       content:"";
       position:absolute;
-      right:-40px;
-      bottom:-40px;
-      width:180px;
-      height:180px;
+      width:220px;
+      height:220px;
       border-radius:50%;
-      background:rgba(255,255,255,0.06);
+      right:-60px;
+      top:-50px;
+      background:rgba(255,255,255,0.15);
     }
 
-    .hero-card small{
-      display:block;
-      font-size:12px;
-      text-transform:uppercase;
-      letter-spacing:2px;
-      color:#cde0ef;
-      margin-bottom:14px;
-      font-weight:700;
+    .mock-browser{
+      background:#fff;
+      border-radius:24px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,0.35);
+      box-shadow:var(--shadow-strong);
+      position:relative;
+      z-index:1;
     }
 
-    .hero-card h3{
-      font-size:28px;
-      line-height:1.15;
-      margin-bottom:14px;
+    .browser-top{
+      background:#f2f6f9;
+      padding:14px 16px;
+      display:flex;
+      align-items:center;
+      gap:8px;
+      border-bottom:1px solid rgba(38,69,97,0.08);
     }
 
-    .hero-card p{
-      color:#e2edf5;
-      margin-bottom:18px;
+    .dot{
+      width:10px;
+      height:10px;
+      border-radius:50%;
+      background:#d0d9e2;
     }
 
-    .hero-list{
-      list-style:none;
+    .browser-body{
+      padding:22px;
+      background:
+        linear-gradient(180deg, #fbfdff 0%, #f3f8fb 100%);
+    }
+
+    .mini-hero{
       display:grid;
-      gap:12px;
+      grid-template-columns:1fr;
+      gap:16px;
     }
 
-    .hero-list li{
-      padding:12px 14px;
-      border:1px solid rgba(255,255,255,0.12);
-      background:rgba(255,255,255,0.05);
-      border-radius:14px;
-      color:#ffffff;
-      font-size:15px;
+    .mini-banner{
+      height:140px;
+      border-radius:22px;
+      background:
+        radial-gradient(circle at right top, rgba(45,179,108,0.18), transparent 25%),
+        linear-gradient(135deg, #27455f, #3a6488);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .mini-banner::after{
+      content:"";
+      position:absolute;
+      width:160px;
+      height:160px;
+      border-radius:50%;
+      right:-40px;
+      bottom:-60px;
+      background:rgba(255,255,255,0.10);
+    }
+
+    .mini-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+    }
+
+    .mini-card{
+      min-height:108px;
+      border-radius:18px;
+      background:#fff;
+      border:1px solid var(--line);
+      padding:16px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      transition:.25s ease;
+    }
+
+    .mini-card:hover{
+      transform:translateY(-4px);
+      box-shadow:var(--shadow);
+    }
+
+    .mini-line{
+      height:10px;
+      border-radius:999px;
+      background:#dfe8ef;
+    }
+
+    .mini-line.w70{ width:70%; }
+    .mini-line.w55{ width:55%; }
+    .mini-line.w90{ width:90%; }
+    .mini-line.w45{ width:45%; }
+
+    .mini-pill{
+      width:84px;
+      height:28px;
+      border-radius:999px;
+      background:linear-gradient(135deg, var(--accent), var(--accent-2));
     }
 
     .section{
-      padding:84px 0;
+      padding:88px 0;
     }
 
     .section-header{
@@ -311,16 +431,16 @@
     }
 
     .section-header h2{
-      font-size:42px;
-      letter-spacing:-1.5px;
-      line-height:1.08;
+      font-size:44px;
+      line-height:1.06;
+      letter-spacing:-1.8px;
       margin-bottom:14px;
-      color:var(--dark);
+      color:#183044;
     }
 
     .section-header p{
-      font-size:18px;
       color:var(--text-soft);
+      font-size:18px;
     }
 
     .cards{
@@ -330,41 +450,228 @@
     }
 
     .card{
-      background:var(--panel);
-      border:1px solid var(--line);
       border-radius:24px;
       padding:28px;
-      box-shadow:var(--shadow);
+      position:relative;
+      overflow:hidden;
+      transition:.28s ease;
+    }
+
+    .card::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg, rgba(255,255,255,0.25), transparent);
+      opacity:0;
+      transition:.28s ease;
+      pointer-events:none;
+    }
+
+    .card:hover{
+      transform:translateY(-8px);
+      box-shadow:var(--shadow-strong);
+      border-color:rgba(38,69,97,0.20);
+    }
+
+    .card:hover::before{
+      opacity:1;
     }
 
     .card-icon{
-      width:46px;
-      height:46px;
-      border-radius:14px;
-      background:var(--brand-soft);
-      color:var(--brand);
+      width:48px;
+      height:48px;
+      border-radius:16px;
       display:flex;
       align-items:center;
       justify-content:center;
-      font-weight:800;
+      background:linear-gradient(135deg, #dce8f2, #edf5fb);
+      color:var(--brand);
+      font-size:17px;
+      font-weight:900;
       margin-bottom:18px;
-      font-size:18px;
+      transition:.25s ease;
+    }
+
+    .card:hover .card-icon{
+      transform:scale(1.08) rotate(-3deg);
+      background:linear-gradient(135deg, var(--brand), var(--brand-2));
+      color:#fff;
     }
 
     .card h3{
       font-size:24px;
-      line-height:1.15;
+      line-height:1.12;
       margin-bottom:12px;
-      color:var(--dark);
     }
 
     .card p{
       color:var(--text-soft);
       font-size:16px;
+      margin-bottom:16px;
+    }
+
+    .card-link{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      color:var(--brand);
+      font-weight:800;
+      font-size:14px;
+      transition:.25s ease;
+    }
+
+    .card:hover .card-link{
+      color:var(--accent-2);
+      transform:translateX(4px);
+    }
+
+    .visual-section{
+      padding-top:24px;
+    }
+
+    .showcase{
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:24px;
+      align-items:stretch;
+    }
+
+    .showcase-panel{
+      border-radius:28px;
+      padding:28px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .showcase-dark{
+      background:linear-gradient(135deg, #1f3b54, #2f5d80);
+      color:#fff;
+      box-shadow:var(--shadow-strong);
+    }
+
+    .showcase-dark h3{
+      font-size:34px;
+      line-height:1.08;
+      margin-bottom:14px;
+      letter-spacing:-1.2px;
+    }
+
+    .showcase-dark p{
+      color:#e0ecf5;
+      margin-bottom:24px;
+      max-width:520px;
+    }
+
+    .feature-list{
+      list-style:none;
+      display:grid;
+      gap:12px;
+    }
+
+    .feature-list li{
+      padding:13px 15px;
+      border-radius:16px;
+      background:rgba(255,255,255,0.09);
+      border:1px solid rgba(255,255,255,0.12);
+      font-weight:600;
+      transition:.25s ease;
+    }
+
+    .feature-list li:hover{
+      background:rgba(255,255,255,0.14);
+      transform:translateX(4px);
+    }
+
+    .showcase-image{
+      background:#fff;
+      border:1px solid var(--line);
+      box-shadow:var(--shadow);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .illustration{
+      width:100%;
+      height:100%;
+      min-height:420px;
+      border-radius:22px;
+      background:
+        radial-gradient(circle at top right, rgba(45,179,108,0.10), transparent 18%),
+        radial-gradient(circle at bottom left, rgba(56,95,129,0.12), transparent 24%),
+        linear-gradient(180deg, #ffffff 0%, #f2f7fb 100%);
+      padding:22px;
+      display:grid;
+      grid-template-rows:auto 1fr auto;
+      gap:16px;
+    }
+
+    .illus-top{
+      display:flex;
+      gap:10px;
+    }
+
+    .illus-bar{
+      height:12px;
+      border-radius:999px;
+      background:#d7e2ea;
+    }
+
+    .illus-main{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:14px;
+    }
+
+    .illus-box{
+      border-radius:18px;
+      background:#fff;
+      border:1px solid var(--line);
+      box-shadow:0 10px 24px rgba(25,42,58,0.06);
+      padding:16px;
+      transition:.25s ease;
+    }
+
+    .illus-box:hover{
+      transform:translateY(-4px);
+    }
+
+    .illus-hero{
+      min-height:170px;
+      background:
+        linear-gradient(135deg, #264561, #3d678b);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .illus-hero::after{
+      content:"";
+      position:absolute;
+      width:140px;
+      height:140px;
+      border-radius:50%;
+      right:-30px;
+      bottom:-40px;
+      background:rgba(255,255,255,0.12);
+    }
+
+    .illus-stack{
+      display:grid;
+      gap:14px;
+    }
+
+    .illus-stat{
+      min-height:78px;
+    }
+
+    .illus-bottom{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:14px;
     }
 
     .highlight{
-      background:linear-gradient(180deg, #213646 0%, #182735 100%);
+      background:linear-gradient(135deg, #223c54, #183044);
       color:#fff;
     }
 
@@ -373,7 +680,7 @@
     }
 
     .highlight .section-header p{
-      color:#d4e1ea;
+      color:#dbe7f1;
     }
 
     .stats{
@@ -383,23 +690,30 @@
     }
 
     .stat{
-      border:1px solid rgba(255,255,255,0.1);
-      background:rgba(255,255,255,0.06);
       border-radius:22px;
-      padding:28px 22px;
+      padding:28px 20px;
+      background:rgba(255,255,255,0.08);
+      border:1px solid rgba(255,255,255,0.10);
       text-align:center;
+      transition:.28s ease;
+    }
+
+    .stat:hover{
+      transform:translateY(-8px);
+      background:rgba(255,255,255,0.12);
+      box-shadow:0 20px 40px rgba(0,0,0,0.16);
     }
 
     .stat strong{
       display:block;
-      font-size:32px;
-      font-weight:800;
+      font-size:31px;
+      font-weight:900;
       line-height:1.1;
       margin-bottom:8px;
     }
 
     .stat span{
-      color:#d6e3ed;
+      color:#dbe7f1;
       font-size:15px;
     }
 
@@ -410,18 +724,20 @@
     }
 
     .about-box{
-      background:#fff;
-      border:1px solid var(--line);
-      border-radius:24px;
+      border-radius:26px;
       padding:30px;
-      box-shadow:var(--shadow);
+      transition:.28s ease;
+    }
+
+    .about-box:hover{
+      transform:translateY(-8px);
+      box-shadow:var(--shadow-strong);
     }
 
     .about-box h3{
-      font-size:28px;
-      line-height:1.1;
+      font-size:29px;
+      line-height:1.08;
       margin-bottom:14px;
-      color:var(--dark);
     }
 
     .about-box p{
@@ -433,31 +749,33 @@
       list-style:none;
       display:grid;
       gap:12px;
-      margin-top:10px;
+      margin-top:8px;
     }
 
     .checklist li{
-      background:var(--panel-2);
-      border-radius:14px;
-      padding:12px 14px;
-      color:var(--text);
-      font-weight:600;
+      padding:13px 15px;
+      border-radius:16px;
+      background:#f7fafc;
       border:1px solid var(--line);
+      font-weight:700;
+      transition:.25s ease;
+    }
+
+    .checklist li:hover{
+      transform:translateX(4px);
+      border-color:rgba(45,179,108,0.35);
+      background:#fff;
     }
 
     .testimonial-wrap{
-      position:relative;
-      max-width:860px;
+      max-width:900px;
       margin:0 auto;
     }
 
     .testimonial{
       display:none;
-      background:#fff;
-      border:1px solid var(--line);
-      border-radius:28px;
-      padding:36px;
-      box-shadow:var(--shadow);
+      border-radius:30px;
+      padding:38px;
       text-align:center;
     }
 
@@ -466,16 +784,16 @@
     }
 
     .testimonial p{
-      font-size:22px;
+      font-size:24px;
       line-height:1.45;
-      color:var(--dark);
+      color:#183044;
       margin-bottom:18px;
     }
 
     .testimonial strong{
       display:block;
       font-size:17px;
-      color:var(--text);
+      color:var(--brand);
     }
 
     .testimonial span{
@@ -493,35 +811,40 @@
     }
 
     .testimonial-controls button{
-      width:48px;
-      height:48px;
-      border-radius:14px;
-      border:1px solid var(--line);
+      width:50px;
+      height:50px;
+      border:none;
+      border-radius:16px;
       background:#fff;
-      font-size:20px;
+      border:1px solid var(--line);
+      box-shadow:var(--shadow);
       cursor:pointer;
-      transition:.2s ease;
-      color:var(--dark);
+      font-size:20px;
+      color:var(--brand);
+      transition:.25s ease;
     }
 
     .testimonial-controls button:hover{
-      transform:translateY(-2px);
-      background:var(--panel-2);
+      transform:translateY(-4px);
+      background:var(--brand);
+      color:#fff;
     }
 
     .faq{
-      max-width:860px;
+      max-width:900px;
       margin:0 auto;
       display:grid;
       gap:14px;
     }
 
     .faq-item{
-      background:#fff;
-      border:1px solid var(--line);
-      border-radius:18px;
+      border-radius:20px;
       overflow:hidden;
-      box-shadow:var(--shadow);
+      transition:.25s ease;
+    }
+
+    .faq-item:hover{
+      box-shadow:var(--shadow-strong);
     }
 
     .faq-question{
@@ -530,25 +853,26 @@
       border:none;
       padding:22px 24px;
       text-align:left;
-      font-size:17px;
-      font-weight:700;
-      color:var(--dark);
-      cursor:pointer;
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:18px;
+      font-size:17px;
+      font-weight:800;
+      color:#183044;
+      cursor:pointer;
     }
 
     .faq-question span:last-child{
       font-size:24px;
-      line-height:1;
-      color:var(--brand);
+      color:var(--accent);
+      transition:.25s ease;
     }
 
     .faq-answer{
       display:none;
       padding:0 24px 22px;
+      background:#fff;
       color:var(--text-soft);
       font-size:16px;
     }
@@ -566,30 +890,49 @@
     }
 
     .cta-box{
-      background:linear-gradient(180deg, #2b506f 0%, #1d3548 100%);
-      color:#fff;
-      border-radius:30px;
+      border-radius:32px;
       padding:48px 30px;
       text-align:center;
-      box-shadow:0 28px 60px rgba(29,53,72,0.25);
+      background:
+        radial-gradient(circle at top right, rgba(45,179,108,0.16), transparent 22%),
+        linear-gradient(135deg, #27455f, #395f7f);
+      color:#fff;
+      box-shadow:var(--shadow-strong);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .cta-box::before{
+      content:"";
+      position:absolute;
+      width:220px;
+      height:220px;
+      border-radius:50%;
+      left:-70px;
+      bottom:-100px;
+      background:rgba(255,255,255,0.08);
     }
 
     .cta-box h2{
-      font-size:46px;
-      line-height:1.05;
-      letter-spacing:-1.7px;
+      position:relative;
+      z-index:1;
+      font-size:48px;
+      line-height:1.03;
+      letter-spacing:-1.8px;
       margin-bottom:14px;
     }
 
     .cta-box p{
-      max-width:680px;
+      position:relative;
+      z-index:1;
+      max-width:700px;
       margin:0 auto 24px;
-      color:#e3eef6;
+      color:#e4eef6;
       font-size:18px;
     }
 
     .footer{
-      padding:30px 0 50px;
+      padding:30px 0 52px;
       text-align:center;
       color:var(--text-soft);
       font-size:14px;
@@ -597,8 +940,8 @@
 
     .fade-up{
       opacity:0;
-      transform:translateY(24px);
-      transition:all .6s ease;
+      transform:translateY(26px);
+      transition:all .65s ease;
     }
 
     .fade-up.show{
@@ -608,6 +951,7 @@
 
     @media (max-width: 1024px){
       .hero-grid,
+      .showcase,
       .about-grid,
       .cards,
       .stats{
@@ -615,7 +959,7 @@
       }
 
       .hero h1{
-        font-size:48px;
+        font-size:50px;
       }
     }
 
@@ -625,28 +969,31 @@
       }
 
       .hero-grid,
+      .showcase,
       .about-grid,
       .cards,
-      .stats{
+      .stats,
+      .illus-main,
+      .illus-bottom{
         grid-template-columns:1fr;
       }
 
+      .topbar-inner{
+        padding:12px 16px;
+      }
+
+      .brand-title{
+        font-size:12px;
+        letter-spacing:2.6px;
+      }
+
       .hero{
-        padding:56px 0 36px;
+        padding:34px 0 14px;
       }
 
       .hero h1{
         font-size:38px;
-        letter-spacing:-1.6px;
-      }
-
-      .section{
-        padding:62px 0;
-      }
-
-      .section-header h2,
-      .cta-box h2{
-        font-size:32px;
+        letter-spacing:-1.7px;
       }
 
       .hero-actions{
@@ -657,13 +1004,17 @@
         width:100%;
       }
 
-      .brand-title{
-        font-size:12px;
-        letter-spacing:2.8px;
+      .section{
+        padding:66px 0;
+      }
+
+      .section-header h2,
+      .cta-box h2{
+        font-size:33px;
       }
 
       .testimonial p{
-        font-size:18px;
+        font-size:19px;
       }
     }
   </style>
@@ -671,48 +1022,50 @@
 <body>
 
   <header class="topbar">
-    <div class="container topbar-inner">
-      <a href="#" class="brand">
-        <div class="brand-logo-wrap">
-          <img src="logo-rj.png" alt="Logo Tecnologias Digitais">
-        </div>
-        <div class="brand-text">
-          <div class="brand-title">Tecnologias Digitais</div>
-          <div class="brand-subtitle">Soluções para vender melhor online</div>
-        </div>
-      </a>
+    <div class="container">
+      <div class="topbar-inner glass">
+        <a href="#" class="brand">
+          <div class="brand-logo-wrap">
+            <img src="logo-rj.png" alt="Logo Tecnologias Digitais">
+          </div>
+          <div class="brand-text">
+            <div class="brand-title">Tecnologias Digitais</div>
+            <div class="brand-subtitle">sites, landing pages e soluções digitais</div>
+          </div>
+        </a>
 
-      <nav class="nav">
-        <a href="#servicos">Serviços</a>
-        <a href="#sobre">Sobre</a>
-        <a href="#depoimentos">Depoimentos</a>
-        <a href="#faq">Perguntas</a>
-      </nav>
+        <nav class="nav">
+          <a href="#servicos">Serviços</a>
+          <a href="#destaques">Destaques</a>
+          <a href="#sobre">Sobre</a>
+          <a href="#depoimentos">Depoimentos</a>
+          <a href="#faq">Perguntas</a>
+        </nav>
 
-      <a class="btn btn-primary" href="https://wa.me/5585SEUNUMERO?text=Olá%2C%20vim%20pelo%20site%20e%20quero%20falar%20sobre%20um%20projeto." target="_blank">
-        Falar no WhatsApp
-      </a>
+        <a class="btn btn-primary" href="https://wa.me/5585981070860?text=Olá%2C%20vim%20pelo%20site%20e%20quero%20falar%20sobre%20um%20projeto." target="_blank">
+          Falar no WhatsApp
+        </a>
+      </div>
     </div>
   </header>
 
   <section class="hero">
     <div class="container hero-grid">
       <div class="fade-up">
-        <div class="tag">Sites, landing pages e soluções digitais com foco em resultado</div>
+        <div class="tag">Presença digital profissional com foco em resultado</div>
 
-        <h1>Presença digital profissional para atrair, convencer e gerar novos clientes</h1>
+        <h1>Seu negócio precisa de uma página que impressione, explique bem e gere contato</h1>
 
         <p>
-          Desenvolvemos landing pages, sites institucionais e estruturas digitais para empresas,
-          cursos, escolas, clínicas e profissionais que precisam transmitir mais autoridade,
-          organizar melhor sua comunicação e converter mais contatos em oportunidades reais.
+          Criamos landing pages, sites institucionais e soluções digitais para empresas, cursos,
+          escolas, clínicas e profissionais que querem transmitir mais autoridade, organizar melhor
+          sua comunicação e transformar visitas em oportunidades reais de negócio.
         </p>
 
         <div class="hero-actions">
-          <a class="btn btn-primary" href="https://wa.me/5585SEUNUMERO?text=Olá%2C%20quero%20uma%20análise%20do%20meu%20site%20ou%20projeto." target="_blank">
+          <a class="btn btn-primary" href="https://wa.me/5585981070860?text=Olá%2C%20quero%20uma%20análise%20do%20meu%20site%20ou%20projeto." target="_blank">
             Solicitar análise
           </a>
-
           <a class="btn btn-secondary" href="#servicos">
             Ver serviços
           </a>
@@ -721,23 +1074,35 @@
         <div class="hero-points">
           <div class="hero-point">Mais autoridade visual</div>
           <div class="hero-point">Mais clareza na apresentação</div>
-          <div class="hero-point">Mais chances de contato</div>
+          <div class="hero-point">Mais chances de conversão</div>
         </div>
       </div>
 
-      <div class="hero-card fade-up">
-        <small>O que entregamos</small>
-        <h3>Seu site precisa parecer parte da sua empresa — não apenas uma página qualquer</h3>
-        <p>
-          Uma presença digital forte ajuda seu negócio a transmitir confiança, organizar melhor seus serviços e facilitar o caminho do cliente até o contato.
-        </p>
-
-        <ul class="hero-list">
-          <li>Landing pages para captação e campanhas</li>
-          <li>Sites institucionais com visual mais profissional</li>
-          <li>Estrutura orientada para WhatsApp e conversão</li>
-          <li>Organização de conteúdo com foco comercial</li>
-        </ul>
+      <div class="hero-visual glass fade-up">
+        <div class="mock-browser">
+          <div class="browser-top">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </div>
+          <div class="browser-body">
+            <div class="mini-hero">
+              <div class="mini-banner"></div>
+              <div class="mini-grid">
+                <div class="mini-card">
+                  <div class="mini-line w70"></div>
+                  <div class="mini-line w55"></div>
+                  <div class="mini-pill"></div>
+                </div>
+                <div class="mini-card">
+                  <div class="mini-line w90"></div>
+                  <div class="mini-line w45"></div>
+                  <div class="mini-pill"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -745,35 +1110,99 @@
   <section class="section" id="servicos">
     <div class="container">
       <div class="section-header fade-up">
-        <h2>Serviços pensados para transformar presença digital em oportunidade</h2>
+        <h2>Serviços pensados para atrair clientes e valorizar sua marca</h2>
         <p>
-          A proposta não é apenas criar páginas bonitas. É desenvolver estruturas digitais que comuniquem melhor, valorizem sua marca e ajudem seu negócio a vender mais.
+          Não basta estar online. Sua presença digital precisa transmitir confiança, explicar seu valor
+          e facilitar o caminho para o cliente entrar em contato.
         </p>
       </div>
 
       <div class="cards">
-        <div class="card fade-up">
+        <div class="card glass fade-up">
           <div class="card-icon">LP</div>
-          <h3>Landing Pages</h3>
+          <h3>Landing Pages que convertem</h3>
           <p>
-            Páginas focadas em captação de clientes, campanhas, matrículas, lançamentos e geração de contatos pelo WhatsApp ou formulário.
+            Páginas criadas para campanhas, captação de leads, matrículas, lançamentos e geração de contatos pelo WhatsApp.
           </p>
+          <span class="card-link">Mais foco em resultado →</span>
         </div>
 
-        <div class="card fade-up">
+        <div class="card glass fade-up">
           <div class="card-icon">SI</div>
-          <h3>Sites Institucionais</h3>
+          <h3>Sites institucionais profissionais</h3>
           <p>
-            Sites para empresas, cursos, clínicas, escolas e profissionais que precisam apresentar melhor seus serviços e fortalecer a credibilidade da marca.
+            Estruturas para empresas, cursos, escolas, clínicas e profissionais que precisam apresentar melhor seus serviços.
           </p>
+          <span class="card-link">Mais autoridade e credibilidade →</span>
         </div>
 
-        <div class="card fade-up">
+        <div class="card glass fade-up">
           <div class="card-icon">SD</div>
-          <h3>Soluções Digitais</h3>
+          <h3>Soluções digitais sob medida</h3>
           <p>
-            Estruturação de presença online, organização de comunicação, ajustes de posicionamento e apoio digital para negócios que querem evoluir com mais estratégia.
+            Organização de conteúdo, presença online, estratégia visual e apoio digital para negócios que querem evoluir.
           </p>
+          <span class="card-link">Mais clareza para vender →</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section visual-section" id="destaques">
+    <div class="container">
+      <div class="showcase">
+        <div class="showcase-panel showcase-dark fade-up">
+          <h3>Uma presença digital forte faz seu negócio parecer maior, mais organizado e mais confiável</h3>
+          <p>
+            O site certo não serve apenas para “existir”. Ele posiciona sua marca, destaca seus diferenciais
+            e ajuda o cliente a tomar a decisão de chamar você no WhatsApp.
+          </p>
+
+          <ul class="feature-list">
+            <li>Visual alinhado com a identidade da sua marca</li>
+            <li>Textos mais estratégicos e comerciais</li>
+            <li>Estrutura pensada para facilitar o contato</li>
+            <li>Mais impacto nos primeiros segundos de visita</li>
+          </ul>
+        </div>
+
+        <div class="showcase-panel showcase-image fade-up">
+          <div class="illustration">
+            <div class="illus-top">
+              <div class="illus-bar" style="width:22%"></div>
+              <div class="illus-bar" style="width:48%"></div>
+              <div class="illus-bar" style="width:16%"></div>
+            </div>
+
+            <div class="illus-main">
+              <div class="illus-box illus-hero"></div>
+              <div class="illus-stack">
+                <div class="illus-box illus-stat">
+                  <div class="mini-line w90"></div>
+                  <div class="mini-line w45" style="margin-top:12px;"></div>
+                </div>
+                <div class="illus-box illus-stat">
+                  <div class="mini-line w70"></div>
+                  <div class="mini-line w55" style="margin-top:12px;"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="illus-bottom">
+              <div class="illus-box">
+                <div class="mini-line w70"></div>
+                <div class="mini-line w45" style="margin-top:12px;"></div>
+              </div>
+              <div class="illus-box">
+                <div class="mini-line w90"></div>
+                <div class="mini-line w55" style="margin-top:12px;"></div>
+              </div>
+              <div class="illus-box">
+                <div class="mini-line w55"></div>
+                <div class="mini-line w45" style="margin-top:12px;"></div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -784,29 +1213,26 @@
       <div class="section-header fade-up">
         <h2>O que um bom projeto digital precisa transmitir em poucos segundos</h2>
         <p>
-          Quando o visual, o conteúdo e a organização trabalham juntos, sua marca comunica mais valor e gera mais confiança.
+          Quando design, conteúdo e estratégia trabalham juntos, sua marca gera mais segurança e mais chances de negócio.
         </p>
       </div>
 
       <div class="stats">
         <div class="stat fade-up">
           <strong>+Autoridade</strong>
-          <span>Visual mais profissional e coerente com a marca</span>
+          <span>Visual profissional e mais credibilidade</span>
         </div>
-
         <div class="stat fade-up">
           <strong>+Clareza</strong>
-          <span>Serviços apresentados de forma mais objetiva</span>
+          <span>Serviços explicados com objetividade</span>
         </div>
-
         <div class="stat fade-up">
           <strong>+Contato</strong>
-          <span>Mais facilidade para o cliente chamar no WhatsApp</span>
+          <span>Mais facilidade para chamar no WhatsApp</span>
         </div>
-
         <div class="stat fade-up">
           <strong>+Resultado</strong>
-          <span>Presença digital com foco em oportunidade real</span>
+          <span>Mais oportunidades a partir da internet</span>
         </div>
       </div>
     </div>
@@ -817,29 +1243,32 @@
       <div class="section-header fade-up">
         <h2>Tecnologia, comunicação e experiência prática no mesmo projeto</h2>
         <p>
-          A experiência com educação, audiovisual, plataformas digitais, sites e estruturação de conteúdo permite criar páginas mais claras, mais profissionais e mais conectadas com o resultado que o cliente espera.
+          A combinação entre experiência em educação, audiovisual, plataformas digitais e comunicação
+          permite desenvolver páginas mais claras, mais bonitas e mais preparadas para gerar resultado.
         </p>
       </div>
 
       <div class="about-grid">
-        <div class="about-box fade-up">
+        <div class="about-box glass fade-up">
           <h3>Sobre a empresa</h3>
           <p>
-            Tecnologias Digitais atua no desenvolvimento de landing pages, sites institucionais e soluções digitais para negócios que precisam melhorar sua imagem, organizar sua presença online e captar mais oportunidades.
+            Tecnologias Digitais desenvolve landing pages, sites institucionais e soluções digitais para
+            negócios que precisam fortalecer sua imagem, organizar melhor sua comunicação e captar mais clientes.
           </p>
           <p>
-            Cada projeto é pensado para alinhar identidade visual, conteúdo estratégico e facilidade de contato, sempre com foco em transmitir confiança e gerar resultado.
+            Cada projeto é pensado para alinhar identidade visual, conteúdo estratégico e facilidade de contato,
+            sempre com foco em transmitir confiança e gerar oportunidade real.
           </p>
         </div>
 
-        <div class="about-box fade-up">
+        <div class="about-box glass fade-up">
           <h3>Diferenciais que fazem diferença</h3>
           <ul class="checklist">
-            <li>Visão prática de comunicação, tecnologia e conversão</li>
+            <li>Visão prática de tecnologia, comunicação e conversão</li>
             <li>Experiência com cursos, escolas, professores e negócios digitais</li>
-            <li>Capacidade de unir estética, clareza e função comercial</li>
-            <li>Atendimento direto e projeto personalizado</li>
-            <li>Foco em páginas que ajudam a vender, não apenas a existir</li>
+            <li>Capacidade de unir estética, clareza e objetivo comercial</li>
+            <li>Atendimento direto e personalizado</li>
+            <li>Projetos pensados para vender, não apenas para existir</li>
           </ul>
         </div>
       </div>
@@ -851,12 +1280,12 @@
       <div class="section-header fade-up">
         <h2>Depoimentos</h2>
         <p>
-          Você pode começar com estes textos-modelo e depois substituir pelos depoimentos reais dos seus primeiros clientes.
+          Estes textos podem ser usados como base inicial até você substituir pelos depoimentos reais dos seus clientes.
         </p>
       </div>
 
-      <div class="testimonial-wrap fade-up">
-        <div class="testimonial active">
+      <div class="testimonial-wrap">
+        <div class="testimonial glass active fade-up">
           <p>
             “O projeto trouxe muito mais profissionalismo para nossa presença online. O site ficou claro, elegante e muito mais coerente com a imagem da empresa.”
           </p>
@@ -864,23 +1293,23 @@
           <span>Empresa de serviços</span>
         </div>
 
-        <div class="testimonial">
+        <div class="testimonial glass">
           <p>
             “Conseguimos apresentar melhor nossos serviços e facilitar o contato com os clientes. A organização da página fez muita diferença.”
           </p>
           <strong>Cliente modelo</strong>
-          <span>Curso / escola / profissional</span>
+          <span>Curso, escola ou profissional</span>
         </div>
 
-        <div class="testimonial">
+        <div class="testimonial glass">
           <p>
             “O trabalho uniu design, clareza e estratégia. Ficou muito acima de um site comum e realmente passou mais credibilidade.”
           </p>
           <strong>Cliente modelo</strong>
-          <span>Clínica / empresa / projeto</span>
+          <span>Clínica, empresa ou projeto digital</span>
         </div>
 
-        <div class="testimonial-controls">
+        <div class="testimonial-controls fade-up">
           <button type="button" onclick="prevTestimonial()">‹</button>
           <button type="button" onclick="nextTestimonial()">›</button>
         </div>
@@ -893,12 +1322,12 @@
       <div class="section-header fade-up">
         <h2>Perguntas frequentes</h2>
         <p>
-          Uma seção importante para reduzir dúvidas, aumentar segurança e facilitar a decisão do cliente.
+          Uma boa seção de perguntas ajuda a reduzir objeções e deixa o cliente mais seguro para entrar em contato.
         </p>
       </div>
 
       <div class="faq">
-        <div class="faq-item fade-up">
+        <div class="faq-item glass fade-up">
           <button class="faq-question" type="button">
             <span>Que tipo de projeto vocês desenvolvem?</span>
             <span>+</span>
@@ -908,7 +1337,7 @@
           </div>
         </div>
 
-        <div class="faq-item fade-up">
+        <div class="faq-item glass fade-up">
           <button class="faq-question" type="button">
             <span>Esse tipo de site serve para qualquer nicho?</span>
             <span>+</span>
@@ -918,7 +1347,7 @@
           </div>
         </div>
 
-        <div class="faq-item fade-up">
+        <div class="faq-item glass fade-up">
           <button class="faq-question" type="button">
             <span>Posso começar com uma página e depois ampliar?</span>
             <span>+</span>
@@ -928,13 +1357,13 @@
           </div>
         </div>
 
-        <div class="faq-item fade-up">
+        <div class="faq-item glass fade-up">
           <button class="faq-question" type="button">
             <span>Como solicito um orçamento?</span>
             <span>+</span>
           </button>
           <div class="faq-answer">
-            Basta clicar no botão de WhatsApp e enviar uma mensagem com seu objetivo, seu negócio e o tipo de projeto que deseja. A partir disso, avaliamos a melhor solução.
+            Basta clicar no botão de WhatsApp e enviar uma mensagem com seu objetivo, seu negócio e o tipo de projeto que deseja.
           </div>
         </div>
       </div>
@@ -946,10 +1375,10 @@
       <div class="cta-box fade-up">
         <h2>Vamos criar uma presença digital mais forte para o seu negócio?</h2>
         <p>
-          Solicite uma análise inicial e descubra como sua página pode transmitir mais autoridade, facilitar o contato com clientes e apoiar suas vendas.
+          Solicite uma análise inicial e descubra como sua página pode transmitir mais autoridade,
+          facilitar o contato com clientes e apoiar suas vendas.
         </p>
-
-        <a class="btn btn-primary" href="https://wa.me/5585981710860?text=Olá%2C%20quero%20uma%20análise%20do%20meu%20site%20ou%20projeto." target="_blank">
+        <a class="btn btn-primary" href="https://wa.me/5585981070860?text=Olá%2C%20quero%20uma%20análise%20do%20meu%20site%20ou%20projeto." target="_blank">
           Solicitar análise
         </a>
       </div>
@@ -957,7 +1386,7 @@
   </section>
 
   <footer class="footer">
-    © Tecnologias Digitais — Presença digital com clareza, estratégia e resultado.
+    © Tecnologias Digitais — presença digital com clareza, estratégia e resultado.
   </footer>
 
   <script>
@@ -979,9 +1408,7 @@
       showTestimonial(testimonialIndex);
     }
 
-    const faqItems = document.querySelectorAll('.faq-item');
-
-    faqItems.forEach(item => {
+    document.querySelectorAll('.faq-item').forEach(item => {
       const button = item.querySelector('.faq-question');
       button.addEventListener('click', () => {
         item.classList.toggle('active');
