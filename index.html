@@ -12,23 +12,22 @@
 
   <style>
     :root{
-      --bg: #eef3f7;
-      --bg-2: #f7fafc;
-      --panel: rgba(255,255,255,0.78);
-      --panel-strong: #ffffff;
-      --text: #16202a;
-      --text-soft: #5f6d79;
-      --line: rgba(38,69,97,0.12);
-      --brand: #264561;
-      --brand-2: #385f81;
-      --brand-soft: #dce8f2;
-      --accent: #2db36c;
-      --accent-2: #21935a;
-      --shadow: 0 18px 45px rgba(19, 38, 54, 0.10);
-      --shadow-strong: 0 28px 70px rgba(23, 42, 58, 0.16);
-      --radius: 24px;
-      --radius-sm: 18px;
-      --max: 1180px;
+      --bg:#eef3f7;
+      --bg-2:#f7fafc;
+      --panel:rgba(255,255,255,0.78);
+      --panel-strong:#ffffff;
+      --text:#16202a;
+      --text-soft:#5f6d79;
+      --line:rgba(38,69,97,0.12);
+      --brand:#264561;
+      --brand-2:#385f81;
+      --brand-soft:#dce8f2;
+      --accent:#2db36c;
+      --accent-2:#21935a;
+      --shadow:0 18px 45px rgba(19,38,54,0.10);
+      --shadow-strong:0 28px 70px rgba(23,42,58,0.16);
+      --radius:24px;
+      --max:1180px;
     }
 
     *{
@@ -42,7 +41,7 @@
     }
 
     body{
-      font-family:'Inter', sans-serif;
+      font-family:'Inter',sans-serif;
       color:var(--text);
       background:
         radial-gradient(circle at top left, rgba(56,95,129,0.10), transparent 30%),
@@ -92,6 +91,14 @@
       gap:20px;
     }
 
+    .brand-area{
+      display:flex;
+      align-items:center;
+      gap:28px;
+      min-width:0;
+      flex:1;
+    }
+
     .brand{
       display:flex;
       align-items:center;
@@ -130,7 +137,7 @@
       object-fit:contain;
       position:relative;
       z-index:1;
-      filter: drop-shadow(0 4px 10px rgba(0,0,0,0.08));
+      filter:drop-shadow(0 4px 10px rgba(0,0,0,0.08));
     }
 
     .brand-text{
@@ -142,15 +149,15 @@
       font-weight:900;
       text-transform:uppercase;
       letter-spacing:4px;
-      line-height:1.2;
+      line-height:1.05;
       color:var(--brand);
     }
 
     .brand-subtitle{
       font-size:11px;
       color:var(--text-soft);
-      letter-spacing:1.2px;
-      margin-top:5px;
+      letter-spacing:1px;
+      margin-top:6px;
       font-weight:600;
     }
 
@@ -222,6 +229,10 @@
     .btn-secondary:hover{
       transform:translateY(-3px);
       box-shadow:var(--shadow);
+    }
+
+    .topbar-cta{
+      flex-shrink:0;
     }
 
     .hero{
@@ -348,13 +359,11 @@
 
     .browser-body{
       padding:22px;
-      background:
-        linear-gradient(180deg, #fbfdff 0%, #f3f8fb 100%);
+      background:linear-gradient(180deg, #fbfdff 0%, #f3f8fb 100%);
     }
 
     .mini-hero{
       display:grid;
-      grid-template-columns:1fr;
       gap:16px;
     }
 
@@ -638,8 +647,7 @@
 
     .illus-hero{
       min-height:170px;
-      background:
-        linear-gradient(135deg, #264561, #3d678b);
+      background:linear-gradient(135deg, #264561, #3d678b);
       position:relative;
       overflow:hidden;
     }
@@ -974,17 +982,67 @@
       .cards,
       .stats,
       .illus-main,
-      .illus-bottom{
+      .illus-bottom,
+      .mini-grid{
         grid-template-columns:1fr;
       }
 
+      .topbar{
+        padding-top:10px;
+      }
+
       .topbar-inner{
-        padding:12px 16px;
+        padding:16px;
+        border-radius:24px;
+        flex-direction:column;
+        align-items:stretch;
+        gap:16px;
+      }
+
+      .brand-area{
+        display:block;
+      }
+
+      .brand{
+        width:100%;
+        align-items:center;
+        gap:14px;
+      }
+
+      .brand-logo-wrap{
+        width:72px;
+        height:72px;
+        border-radius:22px;
+      }
+
+      .brand-logo-wrap img{
+        width:50px;
+        height:50px;
+      }
+
+      .brand-text{
+        flex:1;
       }
 
       .brand-title{
-        font-size:12px;
-        letter-spacing:2.6px;
+        font-size:13px;
+        letter-spacing:3px;
+        line-height:1.05;
+      }
+
+      .brand-subtitle{
+        font-size:10px;
+        line-height:1.45;
+        margin-top:6px;
+        letter-spacing:0.4px;
+        max-width:220px;
+      }
+
+      .topbar-cta{
+        width:100%;
+        min-height:58px;
+        border-radius:18px;
+        font-size:16px;
       }
 
       .hero{
@@ -1016,6 +1074,14 @@
       .testimonial p{
         font-size:19px;
       }
+
+      .showcase-dark h3{
+        font-size:28px;
+      }
+
+      .illustration{
+        min-height:360px;
+      }
     }
   </style>
 </head>
@@ -1024,25 +1090,27 @@
   <header class="topbar">
     <div class="container">
       <div class="topbar-inner glass">
-        <a href="#" class="brand">
-          <div class="brand-logo-wrap">
-            <img src="logo-rj.png" alt="Logo Tecnologias Digitais">
-          </div>
-          <div class="brand-text">
-            <div class="brand-title">Tecnologias Digitais</div>
-            <div class="brand-subtitle">sites, landing pages e soluções digitais</div>
-          </div>
-        </a>
+        <div class="brand-area">
+          <a href="#" class="brand">
+            <div class="brand-logo-wrap">
+              <img src="logo-rj.png" alt="Logo Tecnologias Digitais">
+            </div>
+            <div class="brand-text">
+              <div class="brand-title">Tecnologias<br>Digitais</div>
+              <div class="brand-subtitle">sites, landing pages e soluções digitais</div>
+            </div>
+          </a>
 
-        <nav class="nav">
-          <a href="#servicos">Serviços</a>
-          <a href="#destaques">Destaques</a>
-          <a href="#sobre">Sobre</a>
-          <a href="#depoimentos">Depoimentos</a>
-          <a href="#faq">Perguntas</a>
-        </nav>
+          <nav class="nav">
+            <a href="#servicos">Serviços</a>
+            <a href="#destaques">Destaques</a>
+            <a href="#sobre">Sobre</a>
+            <a href="#depoimentos">Depoimentos</a>
+            <a href="#faq">Perguntas</a>
+          </nav>
+        </div>
 
-        <a class="btn btn-primary" href="https://wa.me/5585981070860?text=Olá%2C%20vim%20pelo%20site%20e%20quero%20falar%20sobre%20um%20projeto." target="_blank">
+        <a class="btn btn-primary topbar-cta" href="https://wa.me/5585981070860?text=Olá%2C%20vim%20pelo%20site%20e%20quero%20falar%20sobre%20um%20projeto." target="_blank">
           Falar no WhatsApp
         </a>
       </div>
@@ -1154,7 +1222,7 @@
         <div class="showcase-panel showcase-dark fade-up">
           <h3>Uma presença digital forte faz seu negócio parecer maior, mais organizado e mais confiável</h3>
           <p>
-            O site certo não serve apenas para “existir”. Ele posiciona sua marca, destaca seus diferenciais
+            O site certo não serve apenas para existir. Ele posiciona sua marca, destaca seus diferenciais
             e ajuda o cliente a tomar a decisão de chamar você no WhatsApp.
           </p>
 
