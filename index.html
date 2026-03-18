@@ -1,845 +1,268 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RJ Tecnologias Digitais</title>
-  <style>
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-    }
-
-    html{
-      scroll-behavior:smooth;
-    }
-
-    body{
-      font-family: Arial, Helvetica, sans-serif;
-      background:#0b0b0b;
-      color:#111;
-      line-height:1.6;
-      overflow-x:hidden;
-    }
-
-    a{
-      text-decoration:none;
-      color:inherit;
-    }
-
-    img{
-      max-width:100%;
-      display:block;
-    }
-
-    .container{
-      width:min(1200px, 92%);
-      margin:0 auto;
-    }
-
-    .section{
-      padding:90px 0;
-      position:relative;
-    }
-
-    .grid{
-      display:grid;
-      gap:24px;
-    }
-
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      padding:16px 28px;
-      border-radius:14px;
-      font-weight:700;
-      transition:.35s ease;
-      border:1px solid transparent;
-      cursor:pointer;
-    }
-
-    .btn-primary{
-      background:#ffffff;
-      color:#111111;
-      box-shadow:0 12px 30px rgba(255,255,255,.12);
-    }
-
-    .btn-primary:hover{
-      transform:translateY(-3px) scale(1.02);
-      box-shadow:0 18px 40px rgba(255,255,255,.18);
-    }
-
-    .btn-secondary{
-      background:transparent;
-      color:#ffffff;
-      border-color:rgba(255,255,255,.18);
-    }
-
-    .btn-secondary:hover{
-      transform:translateY(-3px);
-      background:rgba(255,255,255,.06);
-    }
-
-    .tag{
-      display:inline-block;
-      padding:10px 16px;
-      font-size:12px;
-      border-radius:999px;
-      background:rgba(255,255,255,.08);
-      border:1px solid rgba(255,255,255,.12);
-      color:#f2f2f2;
-      letter-spacing:.8px;
-      text-transform:uppercase;
-    }
-
-    .title{
-      font-size:clamp(34px, 5vw, 64px);
-      line-height:1.05;
-      letter-spacing:-1.8px;
-      margin:20px 0;
-    }
-
-    .subtitle{
-      font-size:clamp(16px, 2vw, 20px);
-      color:#d0d0d0;
-      max-width:760px;
-    }
-
-    .section-heading{
-      text-align:center;
-      margin-bottom:50px;
-    }
-
-    .section-heading h2{
-      font-size:clamp(30px, 4vw, 46px);
-      margin-bottom:14px;
-      letter-spacing:-1px;
-    }
-
-    .section-heading p{
-      max-width:760px;
-      margin:0 auto;
-      font-size:17px;
-      color:#666;
-    }
-
-    /* HERO */
-    .hero{
-      min-height:100vh;
-      display:flex;
-      align-items:center;
-      background:
-        radial-gradient(circle at top left, rgba(255,255,255,.12), transparent 26%),
-        radial-gradient(circle at bottom right, rgba(255,255,255,.07), transparent 24%),
-        linear-gradient(180deg, #0c0c0c 0%, #111111 100%);
-      position:relative;
-      overflow:hidden;
-    }
-
-    .hero::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:
-        linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
-      background-size:42px 42px;
-      mask-image:linear-gradient(to bottom, rgba(0,0,0,.95), transparent 95%);
-      pointer-events:none;
-    }
-
-    .hero-wrap{
-      display:grid;
-      grid-template-columns:1.08fr .92fr;
-      gap:42px;
-      align-items:center;
-      position:relative;
-      z-index:2;
-    }
-
-    .hero-text{
-      color:#fff;
-    }
-
-    .hero-actions{
-      display:flex;
-      flex-wrap:wrap;
-      gap:14px;
-      margin-top:32px;
-    }
-
-    .stats{
-      display:grid;
-      grid-template-columns:repeat(3, 1fr);
-      gap:18px;
-      margin-top:34px;
-    }
-
-    .stat{
-      background:rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.12);
-      border-radius:18px;
-      padding:20px;
-      transition:.3s ease;
-    }
-
-    .stat:hover{
-      transform:translateY(-6px);
-      background:rgba(255,255,255,.09);
-    }
-
-    .stat strong{
-      display:block;
-      font-size:28px;
-      margin-bottom:6px;
-      color:#fff;
-    }
-
-    .stat span{
-      color:#d0d0d0;
-      font-size:14px;
-    }
-
-    .hero-visual{
-      background:linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.05));
-      border:1px solid rgba(255,255,255,.12);
-      border-radius:30px;
-      padding:26px;
-      min-height:500px;
-      position:relative;
-      overflow:hidden;
-      box-shadow:0 30px 70px rgba(0,0,0,.4);
-    }
-
-    .hero-visual::before{
-      content:"";
-      position:absolute;
-      width:320px;
-      height:320px;
-      border-radius:50%;
-      background:rgba(255,255,255,.14);
-      top:-90px;
-      right:-90px;
-      filter:blur(24px);
-    }
-
-    .mockup-grid{
-      position:relative;
-      z-index:2;
-      display:grid;
-      gap:16px;
-      margin-top:80px;
-    }
-
-    .mock-card{
-      background:#ffffff;
-      color:#111;
-      border-radius:20px;
-      padding:20px;
-      border:1px solid rgba(0,0,0,.06);
-      transition:.35s ease;
-      box-shadow:0 12px 28px rgba(0,0,0,.12);
-    }
-
-    .mock-card:hover{
-      transform:translateY(-6px) scale(1.02);
-    }
-
-    .mock-card h4{
-      margin-bottom:8px;
-      font-size:18px;
-    }
-
-    .mock-card p{
-      color:#555;
-      font-size:14px;
-    }
-
-    /* SERVICES */
-    .light-section{
-      background:#f7f7f7;
-    }
-
-    .services{
-      grid-template-columns:repeat(3, 1fr);
-    }
-
-    .card{
-      background:#ffffff;
-      border:1px solid rgba(0,0,0,.08);
-      border-radius:24px;
-      padding:30px;
-      min-height:300px;
-      transition:.35s ease;
-      box-shadow:0 12px 28px rgba(0,0,0,.06);
-      position:relative;
-      overflow:hidden;
-    }
-
-    .card::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:linear-gradient(180deg, rgba(0,0,0,.03), transparent 45%);
-      opacity:0;
-      transition:.35s ease;
-    }
-
-    .card:hover{
-      transform:translateY(-10px) scale(1.02);
-      box-shadow:0 22px 40px rgba(0,0,0,.12);
-    }
-
-    .card:hover::before{
-      opacity:1;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RJ Tecnologias Digitais</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+    font-family:Arial, sans-serif;
+    background:#0b0b0b;
+    color:#111;
+}
+
+/* HEADER */
+.header{
+    position:fixed;
+    top:0;
+    width:100%;
+    background:rgba(0,0,0,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(255,255,255,0.08);
+    z-index:1000;
+}
+
+.nav{
+    max-width:1200px;
+    margin:auto;
+    padding:15px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:#fff;
+    font-weight:bold;
+}
+
+.logo img{
+    height:32px;
+}
+
+/* BUTTON */
+.btn{
+    padding:12px 20px;
+    border-radius:10px;
+    font-weight:bold;
+    text-decoration:none;
+    transition:.3s;
+}
+
+.btn-white{
+    background:#fff;
+    color:#000;
+}
+
+.btn-white:hover{
+    transform:scale(1.05);
+}
+
+/* HERO */
+.hero{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    padding-top:80px;
+    color:#fff;
+    background:linear-gradient(180deg,#0b0b0b,#151515);
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:40px 20px;
+}
+
+.hero h1{
+    font-size:48px;
+    margin-bottom:20px;
+}
+
+.hero p{
+    color:#ccc;
+    max-width:600px;
+}
+
+.hero .btn{
+    margin-top:25px;
+}
+
+/* WHITE SECTION */
+.white{
+    background:#fff;
+    color:#111;
+}
+
+/* DARK SECTION */
+.dark{
+    background:#0f0f0f;
+    color:#fff;
+}
+
+/* CARDS */
+.grid{
+    display:grid;
+    gap:20px;
+}
+
+.services{
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+}
+
+.card{
+    background:#fff;
+    padding:30px;
+    border-radius:18px;
+    border:1px solid #eee;
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 20px 40px rgba(0,0,0,.1);
+}
+
+.dark .card{
+    background:#161616;
+    border:1px solid rgba(255,255,255,0.1);
+}
+
+.card h3{
+    margin-bottom:10px;
+}
+
+/* CTA */
+.cta{
+    text-align:center;
+    padding:60px 20px;
+}
+
+.cta h2{
+    margin-bottom:20px;
+}
+
+/* FOOTER */
+footer{
+    background:#000;
+    color:#ccc;
+    padding:40px 20px;
+    text-align:center;
+    font-size:14px;
+}
+
+footer strong{
+    color:#fff;
+}
+
+/* RESPONSIVO */
+@media(max-width:768px){
+    .hero h1{
+        font-size:32px;
+    }
+}
+</style>
 
-    .icon{
-      width:58px;
-      height:58px;
-      border-radius:16px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background:#111;
-      color:#fff;
-      font-size:24px;
-      margin-bottom:18px;
-    }
-
-    .card h3{
-      font-size:22px;
-      margin-bottom:12px;
-      color:#111;
-    }
-
-    .card p{
-      color:#5d5d5d;
-      font-size:15px;
-      margin-bottom:18px;
-    }
-
-    .card .link{
-      font-size:14px;
-      font-weight:700;
-      color:#111;
-    }
-
-    /* AUTHORITY */
-    .dark-section{
-      background:
-        linear-gradient(180deg, #101010 0%, #161616 100%);
-      color:#fff;
-    }
-
-    .split{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:28px;
-      align-items:center;
-    }
-
-    .panel{
-      background:rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.12);
-      border-radius:28px;
-      padding:34px;
-      transition:.35s ease;
-    }
-
-    .panel:hover{
-      transform:translateY(-6px);
-      background:rgba(255,255,255,.08);
-    }
-
-    .panel h3{
-      font-size:30px;
-      margin-bottom:16px;
-      color:#fff;
-    }
-
-    .panel p{
-      color:#d0d0d0;
-      margin-bottom:18px;
-      font-size:16px;
-    }
-
-    .check-list{
-      display:grid;
-      gap:14px;
-      margin-top:20px;
-    }
-
-    .check-item{
-      padding:14px 16px;
-      border-radius:14px;
-      background:rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.08);
-      color:#ededed;
-    }
-
-    /* PORTFOLIO */
-    .portfolio{
-      grid-template-columns:repeat(3, 1fr);
-    }
-
-    .portfolio-card{
-      background:#fff;
-      border:1px solid rgba(0,0,0,.08);
-      border-radius:24px;
-      overflow:hidden;
-      transition:.35s ease;
-      box-shadow:0 10px 24px rgba(0,0,0,.06);
-    }
-
-    .portfolio-card:hover{
-      transform:translateY(-10px) scale(1.02);
-      box-shadow:0 22px 40px rgba(0,0,0,.12);
-    }
-
-    .portfolio-image{
-      height:220px;
-      background:
-        linear-gradient(135deg, #111111, #2b2b2b 55%, #fafafa 100%);
-      position:relative;
-      overflow:hidden;
-    }
-
-    .portfolio-image::before{
-      content:"";
-      position:absolute;
-      inset:18px;
-      border-radius:18px;
-      background:rgba(255,255,255,.14);
-      border:1px solid rgba(255,255,255,.18);
-    }
-
-    .portfolio-image::after{
-      content:"";
-      position:absolute;
-      width:140px;
-      height:140px;
-      border-radius:50%;
-      background:rgba(255,255,255,.2);
-      right:-30px;
-      top:-20px;
-      filter:blur(4px);
-    }
-
-    .portfolio-content{
-      padding:24px;
-    }
-
-    .portfolio-content h3{
-      font-size:22px;
-      margin-bottom:10px;
-      color:#111;
-    }
-
-    .portfolio-content p{
-      color:#5d5d5d;
-      font-size:15px;
-    }
-
-    /* PROCESS */
-    .process{
-      grid-template-columns:repeat(4, 1fr);
-    }
-
-    .step{
-      background:#fff;
-      border:1px solid rgba(0,0,0,.08);
-      border-radius:22px;
-      padding:24px;
-      transition:.3s ease;
-      box-shadow:0 10px 24px rgba(0,0,0,.05);
-    }
-
-    .step:hover{
-      transform:translateY(-8px);
-    }
-
-    .step .number{
-      width:42px;
-      height:42px;
-      border-radius:50%;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background:#111;
-      color:#fff;
-      margin-bottom:16px;
-      font-weight:700;
-    }
-
-    .step h4{
-      font-size:20px;
-      margin-bottom:10px;
-      color:#111;
-    }
-
-    .step p{
-      color:#5e5e5e;
-      font-size:15px;
-    }
-
-    /* TESTIMONIALS */
-    .testimonials{
-      grid-template-columns:repeat(3, 1fr);
-    }
-
-    .testimonial{
-      background:rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.1);
-      border-radius:22px;
-      padding:28px;
-      transition:.3s ease;
-    }
-
-    .testimonial:hover{
-      transform:translateY(-6px);
-      background:rgba(255,255,255,.09);
-    }
-
-    .testimonial p{
-      color:#ececec;
-      font-size:15px;
-      margin-bottom:18px;
-    }
-
-    .testimonial strong{
-      color:#fff;
-      display:block;
-      margin-bottom:4px;
-    }
-
-    .testimonial span{
-      color:#cfcfcf;
-      font-size:14px;
-    }
-
-    /* CTA */
-    .cta-box{
-      text-align:center;
-      padding:65px 28px;
-      border-radius:30px;
-      background:linear-gradient(135deg, #111111, #1e1e1e 60%, #ffffff 160%);
-      color:#fff;
-      border:1px solid rgba(255,255,255,.12);
-      box-shadow:0 18px 50px rgba(0,0,0,.25);
-    }
-
-    .cta-box h2{
-      font-size:clamp(30px, 4vw, 48px);
-      margin-bottom:16px;
-      letter-spacing:-1px;
-    }
-
-    .cta-box p{
-      color:#dfdfdf;
-      max-width:760px;
-      margin:0 auto 26px;
-      font-size:18px;
-    }
-
-    footer{
-      background:#0b0b0b;
-      color:#bdbdbd;
-      padding:30px 0 50px;
-      text-align:center;
-      font-size:14px;
-    }
-
-    @media (max-width: 980px){
-      .hero{
-        min-height:auto;
-        padding:120px 0 80px;
-      }
-
-      .hero-wrap,
-      .split,
-      .services,
-      .portfolio,
-      .process,
-      .testimonials{
-        grid-template-columns:1fr;
-      }
-
-      .stats{
-        grid-template-columns:1fr;
-      }
-
-      .hero-visual{
-        min-height:auto;
-      }
-
-      .mockup-grid{
-        margin-top:20px;
-      }
-    }
-
-    @media (max-width: 640px){
-      .section{
-        padding:70px 0;
-      }
-
-      .hero-actions{
-        flex-direction:column;
-        align-items:stretch;
-      }
-
-      .btn{
-        width:100%;
-      }
-    }
-  </style>
 </head>
+
 <body>
 
-  <section class="hero">
-    <div class="container hero-wrap">
-      <div class="hero-text">
-        <span class="tag">RJ Tecnologias Digitais</span>
-        <h1 class="title">Soluções digitais com design, estratégia e resultado</h1>
-        <p class="subtitle">
-          Criamos landing pages, sites, sistemas e transmissões profissionais para empresas que querem crescer com mais autoridade, mais presença digital e mais conversão.
-        </p>
-
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="https://wa.me/5585981710860" target="_blank">Falar no WhatsApp</a>
-          <a class="btn btn-secondary" href="#servicos">Ver serviços</a>
+<!-- HEADER -->
+<header class="header">
+    <div class="nav">
+        <div class="logo">
+            <img src="logo-rj.png" alt="RJ Tecnologias">
+            RJ Tecnologias
         </div>
 
-        <div class="stats">
-          <div class="stat">
-            <strong>+20 anos</strong>
-            <span>de experiência com tecnologia, educação e audiovisual</span>
-          </div>
-          <div class="stat">
-            <strong>Projetos sob medida</strong>
-            <span>sem solução genérica e com foco real no seu negócio</span>
-          </div>
-          <div class="stat">
-            <strong>Mais autoridade</strong>
-            <span>para sua marca vender melhor e parecer profissional</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="hero-visual">
-        <div class="mockup-grid">
-          <div class="mock-card">
-            <h4>Landing Pages que convertem</h4>
-            <p>Páginas pensadas para atrair, apresentar bem seu serviço e levar o cliente ao WhatsApp.</p>
-          </div>
-
-          <div class="mock-card">
-            <h4>Sistemas e automações</h4>
-            <p>Soluções personalizadas para cadastro, consulta, gestão interna e produtividade.</p>
-          </div>
-
-          <div class="mock-card">
-            <h4>Transmissões com estrutura profissional</h4>
-            <p>Eventos esportivos, corporativos e educacionais com mais valor, impacto e organização visual.</p>
-          </div>
-        </div>
-      </div>
+        <a href="https://wa.me/5585996414309" target="_blank" class="btn btn-white">
+            WhatsApp
+        </a>
     </div>
-  </section>
+</header>
 
-  <section class="section light-section" id="servicos">
+<!-- HERO -->
+<section class="hero">
     <div class="container">
-      <div class="section-heading">
-        <h2>O que a RJ Tecnologias Digitais entrega</h2>
+        <h1>Soluções digitais com estratégia e resultado</h1>
         <p>
-          Serviços pensados para empresas, profissionais e eventos que precisam se posicionar melhor e gerar mais resultado no digital.
+            Criamos sites, sistemas e transmissões profissionais para empresas que querem crescer com mais autoridade e mais vendas.
         </p>
-      </div>
 
-      <div class="grid services">
-        <div class="card">
-          <div class="icon">🌐</div>
-          <h3>Landing Pages</h3>
-          <p>
-            Páginas modernas, estratégicas e objetivas para captar leads, fortalecer sua marca e gerar atendimento no WhatsApp.
-          </p>
-          <span class="link">Mais impacto visual e mais conversão</span>
-        </div>
-
-        <div class="card">
-          <div class="icon">⚙️</div>
-          <h3>Sistemas e Soluções Digitais</h3>
-          <p>
-            Desenvolvimento de sistemas, formulários, consultas, áreas internas e fluxos personalizados para atender sua operação.
-          </p>
-          <span class="link">Sob medida para sua necessidade</span>
-        </div>
-
-        <div class="card">
-          <div class="icon">🎥</div>
-          <h3>Transmissão ao Vivo</h3>
-          <p>
-            Estrutura técnica e visual profissional para eventos esportivos, escolares, corporativos e projetos especiais.
-          </p>
-          <span class="link">Seu evento com mais valor percebido</span>
-        </div>
-      </div>
+        <a href="https://wa.me/5585996414309" class="btn btn-white">
+            Falar no WhatsApp
+        </a>
     </div>
-  </section>
+</section>
 
-  <section class="section dark-section">
-    <div class="container split">
-      <div class="panel">
-        <h3>Mais do que um layout bonito</h3>
-        <p>
-          A proposta é criar presença digital com estratégia. Seu projeto precisa transmitir confiança, profissionalismo e direcionar o visitante para a ação.
-        </p>
-        <div class="check-list">
-          <div class="check-item">Atendimento direto e estratégico</div>
-          <div class="check-item">Soluções personalizadas, sem aparência amadora</div>
-          <div class="check-item">Design focado em autoridade e conversão</div>
-          <div class="check-item">Integração com WhatsApp e captação de clientes</div>
-        </div>
-      </div>
-
-      <div class="panel">
-        <h3>Para quem é ideal</h3>
-        <p>
-          Empresas, profissionais, instituições e eventos que precisam apresentar melhor seus serviços e comunicar valor de forma mais forte.
-        </p>
-        <div class="check-list">
-          <div class="check-item">Empresas que querem vender mais</div>
-          <div class="check-item">Profissionais que precisam gerar autoridade</div>
-          <div class="check-item">Eventos que querem presença digital forte</div>
-          <div class="check-item">Negócios que querem evoluir a imagem da marca</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section light-section">
+<!-- SERVIÇOS -->
+<section class="white">
     <div class="container">
-      <div class="section-heading">
-        <h2>Soluções que a RJ pode desenvolver</h2>
-        <p>
-          Você pode adaptar esta seção depois com projetos reais, nomes de clientes, prints ou exemplos específicos dos seus serviços.
-        </p>
-      </div>
+        <h2>O que fazemos</h2>
 
-      <div class="grid portfolio">
-        <div class="portfolio-card">
-          <div class="portfolio-image"></div>
-          <div class="portfolio-content">
-            <h3>Sites e páginas institucionais</h3>
-            <p>Estruturas modernas para apresentar sua empresa, seus serviços e seus diferenciais com mais clareza e confiança.</p>
-          </div>
-        </div>
+        <div class="grid services" style="margin-top:30px;">
+            <div class="card">
+                <h3>Landing Pages</h3>
+                <p>Páginas focadas em conversão e geração de clientes.</p>
+            </div>
 
-        <div class="portfolio-card">
-          <div class="portfolio-image"></div>
-          <div class="portfolio-content">
-            <h3>Sistemas personalizados</h3>
-            <p>Projetos desenvolvidos conforme a necessidade do cliente, com foco em organização, produtividade e controle.</p>
-          </div>
-        </div>
+            <div class="card">
+                <h3>Sistemas</h3>
+                <p>Desenvolvimento de soluções personalizadas.</p>
+            </div>
 
-        <div class="portfolio-card">
-          <div class="portfolio-image"></div>
-          <div class="portfolio-content">
-            <h3>Eventos e transmissão profissional</h3>
-            <p>Soluções visuais e técnicas para campeonatos, encontros, aulas, eventos corporativos e produções ao vivo.</p>
-          </div>
+            <div class="card">
+                <h3>Transmissões</h3>
+                <p>Eventos ao vivo com qualidade profissional.</p>
+            </div>
         </div>
-      </div>
     </div>
-  </section>
+</section>
 
-  <section class="section">
+<!-- DIFERENCIAL -->
+<section class="dark">
     <div class="container">
-      <div class="section-heading">
-        <h2>Como funciona o processo</h2>
-        <p>
-          Um fluxo simples para transformar sua ideia em uma solução digital profissional.
-        </p>
-      </div>
+        <h2>Por que escolher a RJ?</h2>
 
-      <div class="grid process">
-        <div class="step">
-          <div class="number">1</div>
-          <h4>Diagnóstico</h4>
-          <p>Entendimento do seu negócio, objetivo, público e necessidade real.</p>
-        </div>
+        <div class="grid services" style="margin-top:30px;">
+            <div class="card">
+                Atendimento direto e estratégico
+            </div>
 
-        <div class="step">
-          <div class="number">2</div>
-          <h4>Estratégia</h4>
-          <p>Definição da estrutura, do posicionamento e da melhor solução para o projeto.</p>
-        </div>
+            <div class="card">
+                Soluções sob medida
+            </div>
 
-        <div class="step">
-          <div class="number">3</div>
-          <h4>Desenvolvimento</h4>
-          <p>Execução com foco em qualidade visual, funcionamento e experiência do usuário.</p>
+            <div class="card">
+                Foco em resultado real
+            </div>
         </div>
-
-        <div class="step">
-          <div class="number">4</div>
-          <h4>Entrega</h4>
-          <p>Projeto pronto para uso, com orientação clara e foco em resultado prático.</p>
-        </div>
-      </div>
     </div>
-  </section>
+</section>
 
-  <section class="section dark-section">
-    <div class="container">
-      <div class="section-heading">
-        <h2 style="color:#fff;">Percepção de valor importa</h2>
-        <p style="color:#d0d0d0;">
-          Você pode trocar estes textos depois por depoimentos reais de clientes ou por resultados de projetos entregues.
-        </p>
-      </div>
+<!-- CTA -->
+<section class="white cta">
+    <h2>Pronto para profissionalizar seu projeto?</h2>
+    <a href="https://wa.me/5585981710860" class="btn btn-white">
+        Chamar no WhatsApp
+    </a>
+</section>
 
-      <div class="grid testimonials">
-        <div class="testimonial">
-          <p>“O projeto trouxe uma imagem muito mais profissional para o nosso serviço e facilitou bastante o contato com os clientes.”</p>
-          <strong>Cliente empresarial</strong>
-          <span>Projeto institucional</span>
-        </div>
-
-        <div class="testimonial">
-          <p>“A solução desenvolvida atendeu exatamente o que precisávamos, com organização, clareza e boa apresentação.”</p>
-          <strong>Cliente de sistema</strong>
-          <span>Desenvolvimento personalizado</span>
-        </div>
-
-        <div class="testimonial">
-          <p>“A transmissão ficou com padrão profissional e elevou o nível do evento. Fez diferença na percepção do público.”</p>
-          <strong>Cliente de evento</strong>
-          <span>Produção e transmissão ao vivo</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section light-section">
-    <div class="container">
-      <div class="cta-box">
-        <h2>Seu projeto merece uma presença digital de verdade</h2>
-        <p>
-          Vamos criar uma solução com mais impacto visual, mais autoridade e mais potencial de venda para o seu negócio.
-        </p>
-        <a class="btn btn-primary" href="https://wa.me/5585981710860" target="_blank">Chamar no WhatsApp agora</a>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    RJ Tecnologias Digitais © 2026 — Soluções digitais com estratégia, design e resultado
-  </footer>
+<!-- FOOTER -->
+<footer>
+    <p><strong>RJ TECNOLOGIAS DIGITAIS LTDA</strong></p>
+    <p>CNPJ: 31.723.964/0001-91</p>
+    <p>Av. Barão de Studart, nº 1165 – Aldeota</p>
+    <p>CEP 60120-001 – Fortaleza - CE</p>
+    <p>WhatsApp: (85) 99641-4309</p>
+    <p>Email: rjtecnologiasdigitais@gmail.com</p>
+</footer>
 
 </body>
 </html>
